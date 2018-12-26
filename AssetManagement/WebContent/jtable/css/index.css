@@ -1,0 +1,65 @@
+@charset "ISO-8859-1";
+#date_time{
+		color:white;
+		font-size: 30px;
+		font-family: "Times New Roman", Times, serif;
+
+
+		}
+		#name{
+		color:white;
+		font-size: 30px;
+		font-family: "Times New Roman", Times, serif;
+
+		}
+		
+
+    .wrapper {
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+    .form-signin {
+        max-width: 500px;
+        height:520px;
+        padding: 10px 38px 66px;
+        margin: 0px;
+        background-color: #eee;
+        border: 3px dotted rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
+
+     .form-signin-heading {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+ 
+    .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        margin:0px;
+        padding: 10px;
+    }
+
+     #user {
+        margin-bottom: 0px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+ 
+    #password {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+	#img {
+    border-radius: 50%;
+	width:150px;
+	height:150px";
+}
+body {
+    background-image: url("http://www.tib.wtf/wp-content/uploads/2015/08/auth.jpg");
+    background-repeat: no-repeat, repeat;
+    background-color: #cccccc;
+}
