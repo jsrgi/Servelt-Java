@@ -1111,4 +1111,86 @@ public class ServiceDao {
 
 	}
 
+	public static List<Task> AssignTaskAll(String emp_id) throws Exception {
+		
+		List<Task> proList = new ArrayList<Task>();
+		try {
+			String query = "SELECT * FROM task WHERE t_status=1 and pro_id=(select pro_id projectempdetail  where emp_id="+emp_id+")";
+			Connection conn = DbConnection.getSqlConnection();
+
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Task t = new Task();
+				t.setT_id(rs.getInt("task_id"));
+				t.setT_name(rs.getString("t_name"));
+				t.setT_des(rs.getString("t_des"));
+				t.setP_name(rs.getString("p_name"));
+				t.setCreate(rs.getString("t_createAt"));
+				t.setAssignee(rs.getString("t_assignee"));
+				t.setStatus(rs.getString("task_status"));
+				t.setDate(rs.getString("t_sdate"));
+				t.setDdate(rs.getString("t_ddate"));				
+				proList.add(t);
+			}
+
+			rs.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		return proList;
+
+	}
+
+	public void updateAssignedTask(Task t) {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		try {
+
+			conn = DbConnection.getSqlConnection();
+			PreparedStatement pst = conn.prepareStatement("update task set t_name=?,t_des=?,"
+					+ "t_assignee=?,t_ddate=? where task_id=?");
+
+			pst.setString(1, t.getT_name());
+			pst.setString(2, t.getT_des());
+			pst.setString(3, t.getAssignee() );
+			pst.setString(4, t.getDdate());			
+			pst.setInt(5, t.getT_id());
+
+			pst.execute();
+			pst.close();
+			conn.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+
+		}
+
+	}
+	
+	public void daleteAssignedTask(int id) {
+
+		Connection conn = null;
+
+		try {
+			System.out.println(id);
+			conn = DbConnection.getSqlConnection();
+			PreparedStatement pst = conn.prepareStatement("update task set t_status=? where task_id=?");
+			pst.setInt(1, 0);
+			pst.setInt(2, id);
+
+			pst.execute();
+			pst.close();
+			conn.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+			// TODO: handle exception
+		}
+
+	}
+
 }
