@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Master | Form </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="master.css">
+
+</head>
+<body>
+
+<div class="form-div-1" >
+<ul class="form-style-1">
+    <li><label>News Header name <span class="required">*</span></label>
+	<input type="text" name="field1" class="field-divided" placeholder="Header name" /> 
+    
+	 
+	<li><label>News created and due Date <span class="required">*</span></label>
+	<input type="date" name="field1" class="field-divided"  />
+	<input type="date" name="field2" class="field-divided"  /></li>
+    <li>
+   
+    <li>
+        <label>Your News <span class="required">*</span></label>
+     
+  <textarea class="form-control" name="comDesc" id="comdesc" cols="3" rows="10" required ></textarea>
+    </li>
+    <li>
+        <input type="submit" value="Submit" />
+    </li>
+</ul>
+</div>
+
+
+
+ <script src="tinymce\plugin\tinymce\tinymce.min.js"></script>
+<script src="jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	tinymce.init({
+	    selector: "textarea",
+	    theme: "modern",
+	    paste_data_images: true,
+	    plugins: [
+	      "advlist autolink lists print preview pagebreak",
+	      "searchreplace wordcount visualblocks visualchars code fullscreen",
+	      "insertdatetime nonbreaking save table contextmenu directionality",
+	      "paste textcolor colorpicker textpattern"
+	    ],
+	    toolbar1: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+	    toolbar2: "print preview  | forecolor backcolor",
+	    image_advtab: true,
+	    file_picker_callback: function(callback, value, meta) {
+	      if (meta.filetype == 'image') {
+	        $('#upload').trigger('click');
+	        $('#upload').on('change', function() {
+	          var file = this.files[0];
+	          var reader = new FileReader();
+	          reader.onload = function(e) {
+	            callback(e.target.result, {
+	              alt: ''
+	            });
+	          };
+	          reader.readAsDataURL(file);
+	        });
+	      }
+	    },
+	    templates: [{
+	      title: 'Test template 1',
+	      content: 'Test 1'
+	    }]
+	  });
+});
+
+</script> 
+
+ <!-- <script>
+  function selectText(hexColor) {
+    var selection = document.selection.createRange();
+    selection.pasteHTML("<span style='color:'"+hexColor+"'>" + range.htmlText + "</span>");
+}
+
+  </script> -->
+</body>
+
+</html>
